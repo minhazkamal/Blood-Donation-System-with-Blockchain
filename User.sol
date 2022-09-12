@@ -21,6 +21,8 @@ contract User {
         bool valid;
     }
 
+    event UserRegistered (address user);
+
     mapping (uint => userInfo) userList;
     mapping (address => userAddress) userAddressList;
     uint[] public userIdList;
@@ -36,6 +38,7 @@ contract User {
         userAddressList[msg.sender] = userAddress(id, msg.sender, true);
         userIdList.push(id);
         id++;
+        emit UserRegistered(msg.sender);
     }
 
     function getUsers() view public returns(uint[] memory) {
